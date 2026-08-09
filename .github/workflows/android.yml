@@ -20,7 +20,14 @@ jobs:
         shell: bash
         run: |
           if compgen -G '.bootstrap/part-*' > /dev/null; then
+            echo "Bootstrap file sizes:"
+            wc -c .bootstrap/part-*
+            echo "Bootstrap SHA-256:"
+            sha256sum .bootstrap/part-*
             cat .bootstrap/part-* | base64 -d > /tmp/brill-src.tgz
+            echo "Decoded archive:"
+            wc -c /tmp/brill-src.tgz
+            sha256sum /tmp/brill-src.tgz
             tar -xzf /tmp/brill-src.tgz -C .
             if [ "${{ github.event_name }}" = "push" ]; then
               rm -rf .bootstrap
