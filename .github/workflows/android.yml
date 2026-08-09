@@ -1,0 +1,64 @@
+name: Android debug APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Import bootstrapped source
+        shell: bash
+        run: |
+          if compgen -G '.bootstrap/part-*' > /dev/null; then
+            cat .bootstrap/part-* | base64 -d > /tmp/brill-src.tgz
+            tar -xzf /tmp/brill-src.tgz -C .
+            rm -rf .bootstrap
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "Import Brill Android v0.2 source"
+            git push
+          fi
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+
+      - name: Install Android SDK 35
+        run: yes | sdkmanager "platforms;android-35" "build-tools;35.0.0" >/dev/null
+
+      - name: Ensure Gradle wrapper
+        run: gradle wrapper --gradle-version 8.13
+
+      - name: Build debug APK
+        run: ./gradlew --no-daemon assembleDebug
+
+      - name: Persist wrapper if CI generated it
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add gradle/wrapper/gradle-wrapper.jar gradle/wrapper/gradle-wrapper.properties gradlew gradlew.bat
+          if ! git diff --cached --quiet; then
+            git commit -m "CI: restore Gradle wrapper"
+            git push
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Brill-min-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
