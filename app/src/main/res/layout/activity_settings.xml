@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/brill_ink"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Brill Body Settings"
+            android:textColor="@color/brill_text"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Private sideloaded prototype. The API key is encrypted with Android Keystore, but a determined owner of the phone could still extract it. Use a dedicated limited key."
+            android:textColor="@color/brill_muted"
+            android:textSize="14sp" />
+
+        <TextView style="@style/SettingLabel" android:text="OpenAI API key" />
+        <EditText
+            android:id="@+id/apiKeyInput"
+            style="@style/SettingInput"
+            android:hint="sk-…"
+            android:inputType="textPassword" />
+
+        <TextView style="@style/SettingLabel" android:text="API base URL" />
+        <EditText
+            android:id="@+id/baseUrlInput"
+            style="@style/SettingInput"
+            android:inputType="textUri" />
+
+        <TextView style="@style/SettingLabel" android:text="Conversation model" />
+        <EditText
+            android:id="@+id/modelInput"
+            style="@style/SettingInput"
+            android:inputType="text" />
+
+        <TextView style="@style/SettingLabel" android:text="Transcription model" />
+        <EditText
+            android:id="@+id/transcriptionModelInput"
+            style="@style/SettingInput"
+            android:inputType="text" />
+
+        <TextView style="@style/SettingLabel" android:text="Brill instructions" />
+        <EditText
+            android:id="@+id/instructionsInput"
+            style="@style/SettingInput"
+            android:gravity="top"
+            android:inputType="textCapSentences|textMultiLine"
+            android:minLines="6" />
+
+        <TextView style="@style/SettingLabel" android:text="Wake phrase" />
+        <EditText
+            android:id="@+id/wakePhraseInput"
+            style="@style/SettingInput"
+            android:inputType="text" />
+
+        <TextView style="@style/SettingLabel" android:text="Experimental upload speed" />
+        <Spinner
+            android:id="@+id/audioSpeedSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/edit_background"
+            android:entries="@array/audio_speed_labels"
+            android:padding="8dp" />
+
+        <Switch
+            android:id="@+id/fallbackSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Retry original audio when sped-up transcription fails"
+            android:textColor="@color/brill_text" />
+
+        <TextView style="@style/SettingLabel" android:text="TTS rate (0.5–2.0)" />
+        <EditText
+            android:id="@+id/ttsRateInput"
+            style="@style/SettingInput"
+            android:inputType="numberDecimal" />
+
+        <TextView style="@style/SettingLabel" android:text="TTS pitch (0.5–2.0)" />
+        <EditText
+            android:id="@+id/ttsPitchInput"
+            style="@style/SettingInput"
+            android:inputType="numberDecimal" />
+
+        <TextView style="@style/SettingLabel" android:text="Shared Brill identity ID (reserved for sync)" />
+        <EditText
+            android:id="@+id/identityIdInput"
+            style="@style/SettingInput"
+            android:inputType="text" />
+
+        <TextView style="@style/SettingLabel" android:text="This body ID" />
+        <EditText
+            android:id="@+id/bodyIdInput"
+            style="@style/SettingInput"
+            android:inputType="text" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/clearKeyButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/button_secondary"
+                android:text="Erase key"
+                android:textAllCaps="false"
+                android:textColor="@color/brill_text" />
+
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_primary"
+                android:text="Save"
+                android:textAllCaps="false"
+                android:textColor="@color/brill_ink"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="Wake-word mode uses Android SpeechRecognizer with offline recognition requested. Whether it stays fully offline depends on the speech service installed on the device. Push-to-talk always records locally first."
+            android:textColor="@color/brill_muted"
+            android:textSize="13sp" />
+    </LinearLayout>
+</ScrollView>

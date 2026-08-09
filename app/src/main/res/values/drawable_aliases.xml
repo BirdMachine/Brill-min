@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- CI/bootstrap build reuses the neutral placeholder for all pose states. -->
+    <item type="drawable" name="brill_listening">@drawable/brill_neutral</item>
+    <item type="drawable" name="brill_thinking">@drawable/brill_neutral</item>
+    <item type="drawable" name="brill_speaking">@drawable/brill_neutral</item>
+    <item type="drawable" name="brill_error">@drawable/brill_neutral</item>
+</resources>

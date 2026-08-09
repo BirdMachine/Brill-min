@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brill_pink">#FFFF8FCB</color>
+    <color name="brill_blue">#FF84D9FF</color>
+    <color name="brill_ink">#FF15131C</color>
+    <color name="brill_panel">#D9252331</color>
+    <color name="brill_text">#FFFDF8FF</color>
+    <color name="brill_muted">#FFBDB4C7</color>
+</resources>

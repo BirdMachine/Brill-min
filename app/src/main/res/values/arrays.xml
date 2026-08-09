@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="audio_speed_labels">
+        <item>1.0× — untouched</item>
+        <item>1.25× — mild</item>
+        <item>1.5× — brisk</item>
+        <item>2.0× — gremlin mode</item>
+    </string-array>
+    <string-array name="audio_speed_values">
+        <item>1.0</item>
+        <item>1.25</item>
+        <item>1.5</item>
+        <item>2.0</item>
+    </string-array>
+</resources>
