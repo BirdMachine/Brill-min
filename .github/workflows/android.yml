@@ -3,6 +3,8 @@ name: Android debug APK
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -20,12 +22,14 @@ jobs:
           if compgen -G '.bootstrap/part-*' > /dev/null; then
             cat .bootstrap/part-* | base64 -d > /tmp/brill-src.tgz
             tar -xzf /tmp/brill-src.tgz -C .
-            rm -rf .bootstrap
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add -A
-            git commit -m "Import Brill Android v0.2 source"
-            git push
+            if [ "${{ github.event_name }}" = "push" ]; then
+              rm -rf .bootstrap
+              git config user.name "github-actions[bot]"
+              git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+              git add -A
+              git commit -m "Import Brill Android v0.2 source"
+              git push
+            fi
           fi
 
       - uses: actions/setup-java@v4
@@ -47,6 +51,7 @@ jobs:
         run: ./gradlew --no-daemon assembleDebug
 
       - name: Persist wrapper if CI generated it
+        if: github.event_name == 'push'
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
